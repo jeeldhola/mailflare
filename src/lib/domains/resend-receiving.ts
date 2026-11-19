@@ -26,7 +26,7 @@ async function storeWebhook(env: CloudflareEnv, id: string | null, secret: strin
 }
 
 function inboundMx(records: ResendDomainRecord[] | undefined) {
-	return (records ?? []).find((record) => record.type === "MX" && isInboundSmtpMx(record.value)) ?? null;
+	return (records ?? []).find((record) => record.type === "MX" && (record.record === "Receiving" || isInboundSmtpMx(record.value))) ?? null;
 }
 
 function isPublicHttps(origin: string): boolean {
